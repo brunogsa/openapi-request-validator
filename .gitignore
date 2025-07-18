@@ -135,5 +135,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-openapi.yaml
-payload.json
+*.yaml
+*.json
+
