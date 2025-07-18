@@ -68,7 +68,7 @@ node openapi-request-validator.js openapi.yaml GET /v1/orders?state=SP&limit=10
 
 The `examples/` folder contains sample files for testing:
 
-- `api.yaml` - Simple OpenAPI 3.0 specification with users and orders endpoints
+- `openapi.yaml` - Simple OpenAPI 3.0 specification with users and orders endpoints
 - `create-user.json` - Valid payload for creating a user
 - `update-user.json` - Valid payload for updating a user
 - `create-order.json` - Valid payload for creating an order
