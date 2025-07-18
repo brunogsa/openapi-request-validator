@@ -11,7 +11,7 @@ async function main() {
   const [specPath, httpVerb, endpointPathWithOptionalQuerystrings, payloadPath] = args;
 
   if (!specPath || !httpVerb || !endpointPathWithOptionalQuerystrings) {
-    console.log('Usage: node index.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
+    console.log('Usage: node openapi-request-validator.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
     console.log('');
     console.log('Parameters:');
     console.log('  openapi-spec: Path to OpenAPI specification file (YAML or JSON)');
@@ -20,15 +20,15 @@ async function main() {
     console.log('  payload-file: Path to JSON payload file (optional for GET/HEAD requests)');
     console.log('');
     console.log('Examples:');
-    console.log('  node index.js openapi.yaml POST /v1/orders payload.json');
-    console.log('  node index.js openapi.yaml GET /v1/orders?state=SP');
+    console.log('  node openapi-request-validator.js openapi.yaml POST /v1/orders payload.json');
+    console.log('  node openapi-request-validator.js openapi.yaml GET /v1/orders?state=SP');
     process.exit(1);
   }
 
   // Validate HTTP verb
   const allowedVerbs = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD'];
   if (!allowedVerbs.includes(httpVerb.toUpperCase())) {
-    console.log('Usage: node index.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
+    console.log('Usage: node openapi-request-validator.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
     console.log('');
     console.log(`Error: HTTP verb must be one of: ${allowedVerbs.join(', ')}`);
     process.exit(1);
@@ -36,7 +36,7 @@ async function main() {
 
   // Validate endpoint path
   if (!endpointPathWithOptionalQuerystrings.startsWith('/')) {
-    console.log('Usage: node index.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
+    console.log('Usage: node openapi-request-validator.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
     console.log('');
     console.log('Error: Endpoint path must start with /');
     process.exit(1);
@@ -46,7 +46,7 @@ async function main() {
   try {
     new URL(endpointPathWithOptionalQuerystrings, 'http://example.com');
   } catch (error) {
-    console.log('Usage: node index.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
+    console.log('Usage: node openapi-request-validator.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
     console.log('');
     console.log('Error: Invalid endpoint path format');
     process.exit(1);
@@ -55,7 +55,7 @@ async function main() {
   // Validate spec file extension
   const specExtension = path.extname(specPath).toLowerCase();
   if (!['.yaml', '.yml', '.json'].includes(specExtension)) {
-    console.log('Usage: node index.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
+    console.log('Usage: node openapi-request-validator.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
     console.log('');
     console.log('Error: OpenAPI spec file must be .yaml, .yml, or .json');
     process.exit(1);
@@ -63,7 +63,7 @@ async function main() {
 
   // Validate payload file extension (if provided)
   if (payloadPath && path.extname(payloadPath).toLowerCase() !== '.json') {
-    console.log('Usage: node index.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
+    console.log('Usage: node openapi-request-validator.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]');
     console.log('');
     console.log('Error: Payload file must be .json');
     process.exit(1);
