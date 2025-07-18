@@ -64,13 +64,23 @@ node openapi-request-validator.js openapi.yaml GET /v1/orders?state=SP&limit=10
 - **Request body validation** only occurs when both payload file is provided and the endpoint accepts a request body
 - **Missing payload** validation occurs for POST/PUT/PATCH requests that require a request body
 
-## Sample Files
+## Examples
 
-The repository includes sample files for testing:
+The `examples/` folder contains sample files for testing:
 
-- `openapi.yaml` - Example OpenAPI specification
-- `payload.json` - Example payload for validation
-- `kit-1.payload.json`, `kit-2.payload.json` - Additional test payloads
+- `api.yaml` - Simple OpenAPI 3.0 specification with users and orders endpoints
+- `create-user.json` - Valid payload for creating a user
+- `update-user.json` - Valid payload for updating a user
+- `create-order.json` - Valid payload for creating an order
+- `invalid-user.json` - Invalid payload for testing validation errors
+
+### Running Tests
+
+```bash
+npm test
+```
+
+This runs the validator against multiple example scenarios including both valid and invalid payloads to ensure the tool works correctly.
 
 ## Output
 

@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "A simple program that validates HTTP requests against OpenAPI specs. Useful for debugging validation errors.",
   "main": "openapi-request-validator.js",
-  "scripts": {},
+  "scripts": {
+    "test:success": "node openapi-request-validator.js examples/api.yaml POST /users examples/create-user.json && node openapi-request-validator.js examples/api.yaml PUT /users/{id} examples/update-user.json && node openapi-request-validator.js examples/api.yaml POST /orders examples/create-order.json && node openapi-request-validator.js examples/api.yaml GET /users && node openapi-request-validator.js examples/api.yaml GET /orders",
+    "test:failure": "node openapi-request-validator.js examples/api.yaml POST /users examples/invalid-user.json; if [ $? -eq 1 ]; then echo 'Expected validation error ✅'; else echo 'Test failed: Expected validation error but got success ❌'; exit 1; fi",
+    "test": "npm run test:success && npm run test:failure && echo '' && echo '🎉 All tests passed! OpenAPI Request Validator is working correctly.'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brunogsa/openapi-request-validator.git"

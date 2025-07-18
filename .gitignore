@@ -138,3 +138,7 @@ dist
 *.yaml
 *.json
 
+# Include examples folder
+!examples/
+!examples/**
+
