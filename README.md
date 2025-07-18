@@ -1,10 +1,10 @@
-# OpenAPI Payload Validator
+# OpenAPI Request Validator
 
-A simple command-line tool that validates JSON payloads against OpenAPI specifications. Useful for debugging validation errors and ensuring API request/response conformance.
+A simple command-line tool that validates HTTP requests against OpenAPI specifications. Useful for debugging validation errors and ensuring API request/response conformance.
 
 ## Features
 
-- Validates JSON payloads against OpenAPI 3.0 schemas
+- Validates HTTP requests against OpenAPI 3.0 schemas
 - Colored output for better readability
 - Detailed error messages with contextual tips
 - Supports dereferenced OpenAPI specs (resolves $refs)
@@ -30,26 +30,39 @@ npm install
 ## Usage
 
 ```bash
-node index.js <openapi-spec> <payload-file>
+node openapi-request-validator.js <openapi-spec> <HTTP-verb> <endpoint-path> [payload-file]
 ```
 
 ### Parameters
 
 - `openapi-spec`: Path to your OpenAPI specification file (YAML or JSON)
-- `payload-file`: Path to the JSON payload file to validate
+- `HTTP-verb`: HTTP method (GET, POST, PUT, PATCH, DELETE, HEAD)
+- `endpoint-path`: API endpoint path with optional querystrings (e.g., `/v1/orders?state=SP`)
+- `payload-file`: Path to the JSON payload file (optional for GET/HEAD requests)
 
-### Example
+### Examples
 
 ```bash
-node index.js openapi.yaml payload.json
+# Validate POST request with payload
+node openapi-request-validator.js openapi.yaml POST /v1/orders payload.json
+
+# Validate GET request (no payload needed)
+node openapi-request-validator.js openapi.yaml GET /v1/orders
+
+# Validate POST request with query parameters
+node openapi-request-validator.js openapi.yaml POST /v1/orders payload.json
+
+# Validate GET request with query parameters
+node openapi-request-validator.js openapi.yaml GET /v1/orders?state=SP&limit=10
 ```
 
-## Configuration
+## Validation Rules
 
-Currently, the tool is configured to validate against a specific schema path:
-`/v1/webhooks/4mdg/product_upserted` (POST request body)
-
-To validate against different schemas, modify the schema path in `index.js:29-30`.
+- **Endpoint paths** must start with `/` and be valid HTTP paths
+- **OpenAPI spec** files must have `.yaml`, `.yml`, or `.json` extensions
+- **Payload files** must have `.json` extension
+- **Request body validation** only occurs when both payload file is provided and the endpoint accepts a request body
+- **Missing payload** validation occurs for POST/PUT/PATCH requests that require a request body
 
 ## Sample Files
 

@@ -1,12 +1,12 @@
 {
-  "name": "openapi-payload-validator",
+  "name": "openapi-request-validator",
   "version": "1.0.0",
-  "description": "A simple program that validates payloads agains some openapi specs. Useful for debugging validation errors.",
-  "main": "index.js",
+  "description": "A simple program that validates HTTP requests against OpenAPI specs. Useful for debugging validation errors.",
+  "main": "openapi-request-validator.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brunogsa/openapi-payload-validator.git"
+    "url": "git+https://github.com/brunogsa/openapi-request-validator.git"
   },
   "keywords": [
     "openapi",
@@ -17,9 +17,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brunogsa/openapi-payload-validator/issues"
+    "url": "https://github.com/brunogsa/openapi-request-validator/issues"
   },
-  "homepage": "https://github.com/brunogsa/openapi-payload-validator#readme",
+  "homepage": "https://github.com/brunogsa/openapi-request-validator#readme",
   "dependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
